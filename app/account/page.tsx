@@ -3,7 +3,8 @@ import React from 'react';
 
 import Dashbroad from './dashbroad';
 
-const AccountPage = (): JSX.Element => {
+const AccountPage: React.FC = () => {
+  
     return (
         <>
             <Dashbroad />

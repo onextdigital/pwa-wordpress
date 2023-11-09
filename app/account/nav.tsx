@@ -1,14 +1,19 @@
 import Link from "next/link";
 
-const AccountNav = (): JSX.Element => {
+interface AccountNavProps {
+    currentPath: string;
+}
+
+const AccountNav: React.FC<AccountNavProps> = ({ currentPath }) => {
+    
     return (
         <div className="nav">
             <Link href="/account">Dashboard</Link>
-            <Link href="/account/orders">Orders</Link>
-            <Link href="/account/profile">Profile</Link>
-            <Link href="/account/address">Address</Link>
-            <Link href="/account/payment">Payment</Link>
-            <Link href="/account/logout">Logout</Link>
+            <Link className={currentPath === '/account/orders' ? 'active' : ''} href="/account/orders">Orders</Link>
+            <Link className={currentPath === '/account/profile' ? 'active' : ''}href="/account/profile">Profile</Link>
+            <Link className={currentPath === '/account/address' ? 'active' : ''}href="/account/address">Address</Link>
+            <Link className={currentPath === '/account/payment' ? 'active' : ''}href="/account/payment">Payment</Link>
+            <Link className={currentPath === '/account/logout' ? 'active' : ''}href="/account/logout">Logout</Link>
         </div>
     );
 };
