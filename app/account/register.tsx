@@ -1,13 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const Register = (props) => {
+const Register = (props: any) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleRegister = async (e) => {
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         alert('Register');
     }

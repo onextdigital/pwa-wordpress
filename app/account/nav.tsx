@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-const AccountNav = () => {
+const AccountNav = (): JSX.Element => {
     return (
         <div className="nav">
-            <Link className="active" href="/account">Dashboard</Link>
+            <Link href="/account">Dashboard</Link>
             <Link href="/account/orders">Orders</Link>
             <Link href="/account/profile">Profile</Link>
             <Link href="/account/address">Address</Link>

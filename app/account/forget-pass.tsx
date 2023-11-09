@@ -1,11 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const ForgetPass = (props) => {
-    const [email, setEmail] = useState(null);
+const ForgetPass: React.FC = (props) => {
+    const [email, setEmail] = useState<string | null>(null);
 
-    const handleForgetPass = async (e) => {
+    const handleForgetPass = async (e: React.FormEvent) => {
         alert('Forget Password');
     }
+
     return (
         <>
             <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
