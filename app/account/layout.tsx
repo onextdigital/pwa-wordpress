@@ -30,7 +30,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
             setIsLogin(true);
             setLoading(false);
         }
-    }, []);
+    }, [pathname]);
 
     return (
         <div className="account-layout container">
