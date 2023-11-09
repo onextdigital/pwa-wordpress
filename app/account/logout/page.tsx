@@ -1,20 +1,13 @@
 "use client";
+import { redirect } from 'next/navigation'
 
-import { useRouter } from 'next/navigation';
-import useCheckLogin  from '../../../utils/functions';
-
-const LogoutPage = () => {
-
-    const router = useRouter();
-    
+const LogoutPage: React.FC = () => {
     
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     
+    redirect('/account');
 
-    // router.push('/account');
-    window.location.href = '/account';
-    
     return <div>Logging out...</div>;
 };
 

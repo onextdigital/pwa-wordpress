@@ -8,7 +8,7 @@ const AccountNav: React.FC<AccountNavProps> = ({ currentPath }) => {
     
     return (
         <div className="nav">
-            <Link href="/account">Dashboard</Link>
+            <Link className={currentPath === '/account/dashbroad' || currentPath === '/account' ? 'active' : ''} href="/account/dashbroad">Dashboard</Link>
             <Link className={currentPath === '/account/orders' ? 'active' : ''} href="/account/orders">Orders</Link>
             <Link className={currentPath === '/account/profile' ? 'active' : ''}href="/account/profile">Profile</Link>
             <Link className={currentPath === '/account/address' ? 'active' : ''}href="/account/address">Address</Link>
