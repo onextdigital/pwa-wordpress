@@ -1,12 +1,13 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation'
 
 import useCheckLogin  from '../../utils/functions';
-import AccountNav from './nav';
 import Login from './login';
 import Loading from '@/components/Loading';
 import Register from './register';
 import ForgetPass from './forget-pass';
+import AccountNav from './nav';
 
 interface AccountLayoutProps {
     children: React.ReactNode;
@@ -16,6 +17,8 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
     const [isLogin, setIsLogin] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [whatAction, setWhatAction] = useState<string>('login');
+
+    const pathname = usePathname();
 
     useEffect(() => {
         const checkLogin = useCheckLogin();
@@ -29,36 +32,30 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
         }
     }, []);
 
-    const login = (arg: boolean) => {
-        setIsLogin(arg);
-    }
-
-    const action = (arg: string) => {
-        setWhatAction(arg);
-    }
-
     return (
         <div className="account-layout container">
             { loading && <Loading /> }
             {isLogin ? (
                 <>
-                    <div className="account-layout__nav">
-                        <AccountNav />
-                    </div>
-                    <div className="account-layout__content">
-                        {children}
+                    <div className="account-layout__body">
+                        <div className="account-layout__nav">
+                            <AccountNav currentPath={pathname} />
+                        </div>
+                        <div className="account-layout__content">
+                            {children}
+                        </div>
                     </div>
                 </>
             ) : (
                 <>
                     {whatAction === 'login' && (
-                        <Login login={login} action={setWhatAction} />
+                        <Login login={setIsLogin} action={setWhatAction} />
                     )}
                     {whatAction === 'register' && (
-                        <Register login={login} action={setWhatAction} />
+                        <Register login={setIsLogin} action={setWhatAction} />
                     )}
                     {whatAction === 'forgot-pass' && (
-                        <ForgetPass login={login} action={setWhatAction} />
+                        <ForgetPass login={setIsLogin} action={setWhatAction} />
                     )}
                 </>
             )}

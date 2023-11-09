@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ForgetPass: React.FC = (props) => {
+const ForgetPass: React.FC = (props : any) => {
     const [email, setEmail] = useState<string | null>(null);
 
     const handleForgetPass = async (e: React.FormEvent) => {
