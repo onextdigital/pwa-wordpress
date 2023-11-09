@@ -12,7 +12,6 @@ const Register = (props) => {
         alert('Register');
     }
 
-
     return (
         <>
             <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">

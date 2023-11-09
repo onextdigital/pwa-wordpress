@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const ForgetPass = (props) => {
-
     const [email, setEmail] = useState(null);
 
     const handleForgetPass = async (e) => {
