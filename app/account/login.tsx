@@ -7,48 +7,57 @@ import useCheckLogin  from '../../utils/functions';
 import createApolloClient from "../../ApolloClient";
 import LOGIN_USER from "../../api/api_user";
 
-const Login = () => {
+import Loading from '@/components/Loading';
+
+const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter();
-
-    useEffect(() => {
-        const checkLogin = useCheckLogin();
-        if (checkLogin) {
-            router.push('/account');
-        }
-    }, [])
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     const client = createApolloClient();
 
-    client
-      .mutate({
-        mutation: LOGIN_USER.LOGIN_USER,
-        variables: {
-          username: username,
-          password: password,
-        },
-      })
-      .then((res) => {
-        // check if login success, save token, name to localstorage and redirect to /account
-        if (res.data.login.authToken) {
-            localStorage.setItem("token", res.data.login.authToken);
-            localStorage.setItem("name", res.data.login.user.name);
-            router.push('/account');
-        }
-        
-      });
+      client
+        .mutate({
+          mutation: LOGIN_USER.LOGIN_USER,
+          variables: {
+            username: username,
+            password: password,
+          },
+        })
+        .then((res) => {
+          // check if login success, save token, name to localstorage and redirect to /account
+          if (res.data.login.authToken) {
+              localStorage.setItem("token", res.data.login.authToken);
+              localStorage.setItem("name", res.data.login.user.name);
+
+              // set isLogin to true
+              props.login(true);
+              setLoading(false);
+          }
+          else {
+              alert('Login failed!');
+              setLoading(false);
+          }
+          
+        })
+        .catch((err) => {
+            alert('Username or password is incorrect!');
+            setLoading(false);
+        });
   };
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
+      {loading && <Loading />}
       <div className="w-full p-6 bg-white rounded-md shadow-md lg:max-w-xl">
         <h1 className="text-3xl font-bold text-center text-gray-700">
-          My Shop
+          Login to My Shop
         </h1>
         <form className="mt-6">
           <div className="mb-4">
@@ -79,12 +88,7 @@ const Login = () => {
               required
             />
           </div>
-          <Link
-            href="/forget"
-            className="text-xs text-blue-600 hover:underline"
-          >
-            Forget Password?
-          </Link>
+          <span onClick={() => props.action('forgot-pass')} className="text-xs text-blue-600 hover:underline cursor-pointer">Forget Password?</span>
           <div className="mt-2">
             <button
               onClick={(e) => handleLogin(e)}
@@ -97,12 +101,7 @@ const Login = () => {
 
         <p className="mt-4 text-sm text-center text-gray-700">
           Don't have an account?{" "}
-          <Link
-            href="/signup"
-            className="font-medium text-blue-600 hover:underline"
-          >
-            Sign up
-          </Link>
+          <span onClick={() => props.action('register')} className="font-medium text-blue-600 hover:underline cursor-pointer">Sign up</span>
         </p>
       </div>
     </div>
