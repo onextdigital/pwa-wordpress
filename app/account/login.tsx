@@ -5,13 +5,18 @@ import LOGIN_USER from "../../api/api_user";
 
 import Loading from '@/components/Loading';
 
-const Login = (props) => {
+interface LoginProps {
+  login: (isLoggedIn: boolean) => void;
+  action: (action: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ login, action }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setLoading(true);
@@ -33,7 +38,7 @@ const Login = (props) => {
           localStorage.setItem("name", res.data.login.user.name);
 
           // set isLogin to true
-          props.login(true);
+          login(true);
           setLoading(false);
         }
         else {
@@ -85,7 +90,7 @@ const Login = (props) => {
                 required
               />
             </div>
-            <span onClick={() => props.action('forgot-pass')} className="text-xs text-blue-600 hover:underline cursor-pointer">Forget Password?</span>
+            <span onClick={() => action('forgot-pass')} className="text-xs text-blue-600 hover:underline cursor-pointer">Forget Password?</span>
             <div className="mt-2">
               <button
                 onClick={(e) => handleLogin(e)}
@@ -98,7 +103,7 @@ const Login = (props) => {
 
           <p className="mt-4 text-sm text-center text-gray-700">
             Don't have an account?{" "}
-            <span onClick={() => props.action('register')} className="font-medium text-blue-600 hover:underline cursor-pointer">Sign up</span>
+            <span onClick={() => action('register')} className="font-medium text-blue-600 hover:underline cursor-pointer">Sign up</span>
           </p>
         </div>
       </div>

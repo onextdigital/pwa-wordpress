@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useCheckLogin  from '../../utils/functions';
 import AccountNav from './nav';
@@ -8,10 +8,14 @@ import Loading from '@/components/Loading';
 import Register from './register';
 import ForgetPass from './forget-pass';
 
-const AccountLayout = ({ children }) => {
-    const [isLogin, setIsLogin] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [whatAction, setWhatAction] = useState('login');
+interface AccountLayoutProps {
+    children: React.ReactNode;
+}
+
+const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
+    const [isLogin, setIsLogin] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [whatAction, setWhatAction] = useState<string>('login');
 
     useEffect(() => {
         const checkLogin = useCheckLogin();
@@ -25,11 +29,11 @@ const AccountLayout = ({ children }) => {
         }
     }, []);
 
-    const login = (arg) => {
+    const login = (arg: boolean) => {
         setIsLogin(arg);
     }
 
-    const action = (arg) => {
+    const action = (arg: string) => {
         setWhatAction(arg);
     }
 
@@ -64,4 +68,3 @@ const AccountLayout = ({ children }) => {
 };
 
 export default AccountLayout;
-

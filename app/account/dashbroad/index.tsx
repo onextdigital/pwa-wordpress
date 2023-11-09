@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Dashbroad = () => {
-    const [name, setName] = useState(null);
+const Dashbroad: React.FC = () => {
+    const [name, setName] = useState<string | null>(null);
 
     useEffect(() => {
         setName(localStorage.getItem("name"));
@@ -10,7 +10,7 @@ const Dashbroad = () => {
     return (
         <>
             <h1>Dashbroad</h1>
-            <p>Hello { name }</p>
+            <p>Hello {name}</p>
         </>
     );
 };

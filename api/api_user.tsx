@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 
 // get info page
-const GET_INFO = gql`
+const GET_INFO: any = gql`
     query GET_INFO {
         generalSettings {
         url
@@ -12,7 +12,7 @@ const GET_INFO = gql`
 
 
 // login user
-const LOGIN_USER = gql`
+const LOGIN_USER: any = gql`
     mutation LOGIN_USER($username: String!, $password: String!) {
         login(input: {username: $username, password: $password}) {
             authToken
