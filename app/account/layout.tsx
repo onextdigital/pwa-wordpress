@@ -9,6 +9,8 @@ import Register from './register';
 import ForgetPass from './forget-pass';
 import AccountNav from './nav';
 
+import './style.css';
+
 interface AccountLayoutProps {
     children: React.ReactNode;
 }
