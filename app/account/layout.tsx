@@ -20,6 +20,12 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [whatAction, setWhatAction] = useState<string>('login');
 
+    // Change title and description page accout
+    useEffect(() => {
+        document.title = 'Account';
+        document.querySelector('meta[name="description"]')?.setAttribute('content', 'My account');
+    }, []);
+
     const pathname = usePathname();
 
     useEffect(() => {
